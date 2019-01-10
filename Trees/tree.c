@@ -6,12 +6,10 @@ struct t_node *make_t_node(unsigned size)
         struct t_node *new_node,
                       *err;
 
-
         new_node = malloc(sizeof(struct t_node) + size);
 
         if((signed long long) new_node < 0)
                 return err = new_node;
-
 
         /*
          * The node is initialized with null parent, children and siblings.
@@ -20,7 +18,6 @@ struct t_node *make_t_node(unsigned size)
         new_node->next_sibling = 0;
         new_node->next_child   = 0;
         new_node->data_size    = size;
-
 
         return new_node;
 }
@@ -31,10 +28,8 @@ int link_t_node(struct t_node *parent, struct t_node *to_link)
         struct t_node *child_ptr;
         int            err;
 
-
         if(!parent || !to_link)
                 return EBAD_ADDRESS;
-
 
         /*
          * child_ptr must be checked, if null, our node is the first child and
@@ -50,11 +45,9 @@ int link_t_node(struct t_node *parent, struct t_node *to_link)
         while(child_ptr->next_sibling != (struct t_node*) 0)
                 child_ptr = child_ptr->next_sibling;
 
-
         child_ptr->next_sibling = to_link;
         to_link->parent         = parent;
         to_link->next_sibling   = (struct t_node*) 0;
-
 
         return 0;
 }
@@ -65,7 +58,6 @@ int unlink_t_node(struct t_node *to_unlink)
         struct t_node *child_ptr,
                       *prev_child_ptr;
 
-
         if(!to_unlink)
                 return EBAD_ADDRESS;
 
@@ -75,12 +67,11 @@ int unlink_t_node(struct t_node *to_unlink)
         if(!to_unlink->parent)
                 return EROOT_NODE;
 
-
         /*
          * Pointer to the parent's child list.
          */
         child_ptr = to_unlink->parent->next_child;
-
+        
         /*
          * The current node is retrieved, prev_child_ptr contains the
          * address of the previous node that has been looked at.
@@ -91,7 +82,6 @@ int unlink_t_node(struct t_node *to_unlink)
                 child_ptr      = child_ptr->next_sibling;
         }
 
-
         if(child_ptr->next_sibling)
         {
                 prev_child_ptr->next_sibling = child_ptr->next_sibling;
@@ -99,14 +89,12 @@ int unlink_t_node(struct t_node *to_unlink)
                 prev_child_ptr->next_sibling = (struct t_node*) 0;
         }
 
-
         /*
          * Only the parent and siblings are unlinked in case the node and it's
          * children are to be reused, linked to another tree or dysallocated.
          */
         to_unlink->parent       = (struct t_node*) 0;
         to_unlink->next_sibling = (struct t_node*) 0;
-
 
         return 0;
 }
@@ -127,9 +115,7 @@ int rem_t_branch(struct t_node *branch_root_node)
          */
         struct t_node *parent;
 
-
         unlink_t_node(branch_root_node);
-
 
         /*
          * We initialize our position at the leftmost leaf
@@ -173,7 +159,6 @@ int rem_t_branch(struct t_node *branch_root_node)
          * And the branch's enterely deleted.
          */
         free(branch_root_node);
-
 
         return 0;
 }
