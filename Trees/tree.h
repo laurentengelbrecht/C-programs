@@ -24,7 +24,7 @@ struct t_node {
  * Dynamically allocates a tree-type node using malloc() and returns it's
  * address. On error, the malloc() error is returned.
  */
-struct t_node *make_t_node(unsigned size);
+struct t_node *make_t_node(unsigned int size);
 
 
 /*
