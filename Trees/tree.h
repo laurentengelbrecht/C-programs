@@ -4,17 +4,14 @@
 #include <stdlib.h>                                                  // malloc()
 #include <stdio.h>
 
-
 #define EBAD_ADDRESS    -1
 #define EROOT_NODE      -2
-
 
 /*
  * parent contains the address of the parent node. siblings and children are
  * one-way null-pointer-terminated linked-lists. data_size references the user
  * given size of the node in bytes.
  */
-
 struct t_node {
         struct t_node  *parent;
         struct t_node  *next_sibling;
