@@ -1,7 +1,7 @@
 #include "tree.h"
 
 
-struct t_node *make_t_node(unsigned size)
+struct t_node *make_t_node(unsigned int size)
 {
         struct t_node *new_node,
                       *err;
